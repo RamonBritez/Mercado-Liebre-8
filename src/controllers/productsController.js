@@ -43,7 +43,7 @@ const controller = {
 			discount: req.body.discount,
 			category: req.body.category,
 			description: req.body.description,
-			image: "default-image.png",
+			image: req.file ? req.file.filename : 'default-image.png'
 		}
 		products.push(newProduct);
 
@@ -74,12 +74,13 @@ const controller = {
 				product.price = req.body.price,
 				product.discount = req.body.discount,
 				product.category = req.body.category,
-				product.description = req.body.description
+				product.description = req.body.description,
+				product.image =  req.file ? req.file.filename : 'default-image.png'
 			}
 		});
 		writeJson(products);
 		
-		res.send('Producto editado correctamente');
+		res.redirect('/products/');
 	},
 
 	// Delete - Delete one product from DB
