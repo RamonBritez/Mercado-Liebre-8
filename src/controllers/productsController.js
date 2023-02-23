@@ -68,14 +68,14 @@ const controller = {
 	update: (req, res) => {
 		let productId = Number(req.params.id);
 
-		products.forEach(product => {
+		products.map(product => {
 			if(product.id === productId){
 				product.name = req.body.name,
 				product.price = req.body.price,
 				product.discount = req.body.discount,
 				product.category = req.body.category,
 				product.description = req.body.description,
-				product.image =  req.file ? req.file.filename : 'default-image.png'
+				product.image =  req.file ? req.file.filename : product.image
 			}
 		});
 		writeJson(products);
